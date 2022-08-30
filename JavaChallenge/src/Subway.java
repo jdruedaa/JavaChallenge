@@ -198,7 +198,51 @@ public class Subway {
 
     public Sub makeSub(Sub subBase)
     {
+        Scanner in = new Scanner(System.in);
+        String inputOpcion;
+        int opcion;
+        boolean addingIngredients = true;
         Sub sub = subBase;
+        List<Ingredient> ingredientes = products.stream()
+                .filter(product -> product instanceof Ingredient)
+                .map(ingredient -> (Ingredient) ingredient)
+                .collect(Collectors.toList());
+        int i = 0;
+        int numOpcion = 1;
+        String pregunta = "Qué ingredientes quisieras añadir?";
+        while(i < ingredientes.size())
+        {
+            pregunta += "\n" + numOpcion + " " + ingredientes.get(i).toString();
+            i++;
+            numOpcion++;
+        }
+        pregunta += "\n" + numOpcion + ". No quiero añadir más ingredientes";
+        do
+        {
+            System.out.println(pregunta);
+            inputOpcion = in.nextLine();
+            opcion = validateInput(inputOpcion, ingredientes.size() + 1);
+            if(opcion == ingredientes.size() + 1)
+            {
+                addingIngredients = false;
+            }
+            else
+            {
+                sub.addIngredient(ingredientes.get(opcion - 1));
+            }
+        }
+        while(opcion == -1 || addingIngredients);
+        do
+        {
+            System.out.println("Lo deseas tostado?\n1. Sí\n2. No");
+            inputOpcion = in.nextLine();
+            opcion = validateInput(inputOpcion, 2);
+            if(opcion == 1)
+            {
+                sub.setToasted(true);
+            }
+        }
+        while(opcion == -1);
         return sub;
     }
 }
