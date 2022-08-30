@@ -26,12 +26,23 @@ public class Subway {
         products.add(bebida);
         Cookie galleta = new Cookie("Macadamia", 3000);
         products.add(galleta);
-        galleta = new Cookie("Chips de chocolate", 3000);
+        galleta = new Cookie("Chips de Chocolate", 3000);
         products.add(galleta);
         galleta = new Cookie("Cheesecake", 3000);
         products.add(galleta);
-        Sub sub = new Sub("Sub de carne", 8000);
+        Sub sub = new Sub("Sub de Carne", 8000);
         products.add(sub);
+        Ingredient ingrediente = new Ingredient("Pan Blanco", 300);
+        products.add(ingrediente);
+        ingrediente = new Ingredient("Carne", 2500);
+        products.add(ingrediente);
+        sub.addIngredient(ingrediente);
+        ingrediente = new Ingredient("Tomate", 2500);
+        products.add(ingrediente);
+        ingrediente = new Ingredient("Queso Probolone", 800);
+        products.add(ingrediente);
+        ingrediente = new Ingredient("Salsa de Tomate", 200);
+        products.add(ingrediente);
     }
 
     public void processOrder()
@@ -46,7 +57,7 @@ public class Subway {
             do
             {
                 System.out.println("Elija la opción que desea:\n1. Añadir producto.\n" +
-                        "2. Ver orden \n3.Finalizar orden");
+                        "2. Ver orden \n3. Finalizar orden");
                 inputOpcion = in.nextLine();
                 opcion = validateInput(inputOpcion, 3);
             }
@@ -56,7 +67,7 @@ public class Subway {
                 do
                 {
                     System.out.println("Qué tipo de producto desea añadir?\n1. Sub\n" +
-                            "2. Bebida \n3.Galleta");
+                            "2. Bebida \n3. Galleta");
                     inputOpcion = in.nextLine();
                     opcion = validateInput(inputOpcion, 3);
                 }
@@ -131,7 +142,7 @@ public class Subway {
                 opcion = validateInput(inputOpcion, subs.size());
             }
             while(opcion == -1);
-            producto = makeSub(subs.get(opcion));
+            producto = makeSub(subs.get(opcion-1));
         }
         else if(opcion == 2)
         {
@@ -155,7 +166,7 @@ public class Subway {
                 opcion = validateInput(inputOpcion, bebidas.size());
             }
             while(opcion == -1);
-            producto = bebidas.get(opcion);
+            producto = bebidas.get(opcion-1);
         }
         else if(opcion == 3)
         {
@@ -179,7 +190,7 @@ public class Subway {
                 opcion = validateInput(inputOpcion, galletas.size());
             }
             while(opcion == -1);
-            producto = galletas.get(opcion);
+            producto = galletas.get(opcion-1);
         }
         //in.close();
         return producto;

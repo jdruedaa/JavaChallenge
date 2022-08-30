@@ -1,7 +1,7 @@
 public class Product
 {
-    private String name;
-    private double price;
+    protected String name;
+    protected double price;
 
     public Product(String name, double price)
     {
