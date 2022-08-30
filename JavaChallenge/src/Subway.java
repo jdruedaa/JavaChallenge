@@ -234,6 +234,34 @@ public class Subway {
         while(opcion == -1 || addingIngredients);
         do
         {
+            System.out.println("Deseas adiciones?\n1. Sí\n2. No");
+            inputOpcion = in.nextLine();
+            opcion = validateInput(inputOpcion, 2);
+            if(opcion == 1)
+            {
+                addingIngredients = true;
+                do
+                {
+                    System.out.println(pregunta);
+                    inputOpcion = in.nextLine();
+                    opcion = validateInput(inputOpcion, ingredientes.size() + 1);
+                    if(opcion == ingredientes.size() + 1)
+                    {
+                        addingIngredients = false;
+                    }
+                    else
+                    {
+                        Ingredient ingredient = ingredientes.get(opcion - 1);
+                        Ingredient addition = new Ingredient(ingredient.getName(),ingredient.getPrice(),true);
+                        sub.addIngredient(addition);
+                    }
+                }
+                while(opcion == -1 || addingIngredients);
+            }
+        }
+        while(opcion == -1);
+        do
+        {
             System.out.println("Lo deseas tostado?\n1. Sí\n2. No");
             inputOpcion = in.nextLine();
             opcion = validateInput(inputOpcion, 2);
