@@ -1,21 +1,25 @@
+package products;
+
+import products.ingredients.Ingredient;
+
 import java.util.ArrayList;
 
 public class Sub extends Product
 {
-    private ArrayList<Ingredient> ingredientes;
+    private final ArrayList<Ingredient> ingredients;
     private boolean toasted;
 
     public Sub(String name, double price)
     {
         super(name, price);
-        ingredientes = new ArrayList<Ingredient>();
+        ingredients = new ArrayList<>();
         toasted = false;
     }
 
-    public Sub(String name, double price, ArrayList<Ingredient> ingredientes)
+    public Sub(String name, double price, ArrayList<Ingredient> ingredients)
     {
         super(name, price);
-        this.ingredientes = ingredientes;
+        this.ingredients = ingredients;
         toasted = false;
     }
 
@@ -27,12 +31,12 @@ public class Sub extends Product
         this.toasted = toasted;
     }
 
-    public void addIngredient(Ingredient ingrediente)
+    public void addIngredient(Ingredient ingredient)
     {
-        ingredientes.add(ingrediente);
-        if(ingrediente.isAddition())
+        ingredients.add(ingredient);
+        if(ingredient.isAddition())
         {
-            price += ingrediente.getPrice();
+            price += ingredient.getPrice();
         }
     }
 }

@@ -1,3 +1,7 @@
+package subway;
+
+import products.Product;
+
 import java.util.ArrayList;
 
 public class Order
@@ -39,7 +43,7 @@ public class Order
 
     public String generateReceipt()
     {
-        return "Order{" +
+        return "subway.Order{" +
                 "totalPrice=" + totalPrice +
                 ", products=" + products +
                 '}';

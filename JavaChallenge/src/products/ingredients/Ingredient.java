@@ -1,3 +1,7 @@
+package products.ingredients;
+
+import products.Product;
+
 public class Ingredient extends Product
 {
     private boolean isAddition;
@@ -16,12 +20,12 @@ public class Ingredient extends Product
 
     @Override
     public String toString() {
-        String ingrediente = name;
+        String ingredient = name;
         if(isAddition)
         {
-            ingrediente += " " + price + " COP";
+            ingredient += " " + price + " COP";
         }
-        return ingrediente;
+        return ingredient;
     }
 
     public boolean isAddition() {
@@ -30,10 +34,5 @@ public class Ingredient extends Product
 
     public void setAddition(boolean addition) {
         isAddition = addition;
-    }
-
-    public String additionString()
-    {
-        return name + " " + price + " COP";
     }
 }
