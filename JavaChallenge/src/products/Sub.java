@@ -16,17 +16,6 @@ public class Sub extends Product
         toasted = false;
     }
 
-    public Sub(String name, double price, ArrayList<Ingredient> ingredients)
-    {
-        super(name, price);
-        this.ingredients = ingredients;
-        toasted = false;
-    }
-
-    public boolean isToasted() {
-        return toasted;
-    }
-
     public void setToasted(boolean toasted) {
         this.toasted = toasted;
     }

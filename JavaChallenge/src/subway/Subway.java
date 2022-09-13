@@ -29,39 +29,70 @@ public class Subway {
 
     public void populate()
     {
-        Drink drink = new Drink("Coca-cola 400 ml", 3400);
+        String productName;
+        double productPrice;
+        productName = "Coca-cola 400 ml";
+        productPrice = 3400;
+        Drink drink = new Drink(productName, productPrice);
         products.add(drink);
-        drink = new Drink("Pepsi 400 ml", 3400);
+        productName = "Pepsi 400 ml";
+        drink = new Drink(productName, productPrice);
         products.add(drink);
-        Cookie cookie = new Cookie("Macadamia", 3000);
+        productName = "Macadamia";
+        productPrice = 3000;
+        Cookie cookie = new Cookie(productName, productPrice);
         products.add(cookie);
-        cookie = new Cookie("Chips de Chocolate", 3000);
+        productName = "Chips de Chocolate";
+        cookie = new Cookie(productName, productPrice);
         products.add(cookie);
-        cookie = new Cookie("Cheesecake", 3000);
+        productName = "Cheesecake";
+        cookie = new Cookie(productName, productPrice);
         products.add(cookie);
-        Bread bread = new Bread("Pan Blanco", 300);
+        productName = "Pan Blanco";
+        productPrice = 300;
+        Bread bread = new Bread(productName, productPrice);
         products.add(bread);
-        bread = new Bread("Pan Integral", 200);
+        productName = "Pan Integral";
+        productPrice = 200;
+        bread = new Bread(productName, productPrice);
         products.add(bread);
-        bread = new Bread("Pan de avena", 400);
+        productName = "Pan de avena";
+        productPrice = 400;
+        bread = new Bread(productName, productPrice);
         products.add(bread);
-        Filling filling = new Filling("Carne", 2500);
+        productName = "Carne";
+        productPrice = 2500;
+        Filling filling = new Filling(productName, productPrice);
         products.add(filling);
-        filling = new Filling("Pollo", 2300);
+        productName = "Pollo";
+        productPrice = 2300;
+        filling = new Filling(productName, productPrice);
         products.add(filling);
-        Veggie veggie = new Veggie("Tomate", 800);
+        productName = "Tomate";
+        productPrice = 800;
+        Veggie veggie = new Veggie(productName, productPrice);
         products.add(veggie);
-        veggie = new Veggie("Lechuga", 500);
+        productName = "Lechuga";
+        productPrice = 500;
+        veggie = new Veggie(productName, productPrice);
         products.add(veggie);
-        Cheese cheese = new Cheese("Queso Probolone", 800);
+        productName = "Queso Probolone";
+        productPrice = 800;
+        Cheese cheese = new Cheese(productName, productPrice);
         products.add(cheese);
-        cheese = new Cheese("Queso Mozarella", 800);
+        productName = "Queso Mozarella";
+        cheese = new Cheese(productName, productPrice);
         products.add(cheese);
-        Sauce sauce = new Sauce("Salsa de Tomate", 200);
+        productName = "Salsa de Tomate";
+        productPrice = 200;
+        Sauce sauce = new Sauce(productName, productPrice);
         products.add(sauce);
-        sauce = new Sauce("Mayonesa", 200);
+        productName = "Mayonesa";
+        sauce = new Sauce(productName, productPrice);
         products.add(sauce);
-        Sub sub = new Sub("Sub personalizado", 8000);
+        productName = "Sub personalizado";
+        productPrice = 8000;
+        Sub sub = new Sub(productName, productPrice);
         products.add(sub);
     }
 
@@ -90,7 +121,7 @@ public class Subway {
                 do
                 {
                     System.out.println("""
-                            Qué tipo de product desea añadir?
+                            Qué tipo de producto desea añadir?
                             1. Sub
                             2. Bebida
                             3. Galleta""");
@@ -98,7 +129,7 @@ public class Subway {
                     option = validateInput(inputOption, 3);
                 }
                 while(option == -1);
-                Product product = selectProduct(option);
+                Product product = selectProduct(option, in);
                 orden.addProduct(product);
                 System.out.println("Product añadido");
             }
@@ -141,16 +172,15 @@ public class Subway {
         System.out.println(receipt);
     }
 
-    public Product selectProduct(int option)
+    public Product selectProduct(int option, Scanner in)
     {
         Product product = null;
-        Scanner in = new Scanner(System.in);
         String inputOption;
         if(option == 1)
         {
             List<Sub> subs = products.stream()
-                    .filter(productSub -> productSub instanceof Sub)
-                    .map(sub -> (Sub) sub).toList();
+                    .filter(Sub.class::isInstance)
+                    .map(Sub.class::cast).toList();
             int i = 0;
             int numOption = 1;
             StringBuilder question = new StringBuilder("Qué sub quisiera elegir?");
@@ -167,13 +197,13 @@ public class Subway {
                 option = validateInput(inputOption, subs.size());
             }
             while(option == -1);
-            product = makeSub(subs.get(option-1));
+            product = makeSub(subs.get(option-1), in);
         }
         else if(option == 2)
         {
             List<Drink> drinks = products.stream()
-                    .filter(productDrink -> productDrink instanceof Drink)
-                    .map(drink -> (Drink) drink).toList();
+                    .filter(Drink.class::isInstance)
+                    .map(Drink.class::cast).toList();
             int i = 0;
             int numOption = 1;
             StringBuilder question = new StringBuilder("Qué bebida quisiera elegir?");
@@ -195,8 +225,8 @@ public class Subway {
         else if(option == 3)
         {
             List<Cookie> cookies = products.stream()
-                    .filter(productCookie -> productCookie instanceof Cookie)
-                    .map(cookie -> (Cookie) cookie).toList();
+                    .filter(Cookie.class::isInstance)
+                    .map(Cookie.class::cast).toList();
             int i = 0;
             int numOption = 1;
             StringBuilder question = new StringBuilder("Qué galleta quisiera elegir?");
@@ -215,19 +245,17 @@ public class Subway {
             while(option == -1);
             product = cookies.get(option-1);
         }
-        //in.close();
         return product;
     }
 
-    public Sub makeSub(Sub baseSub)
+    public Sub makeSub(Sub baseSub, Scanner in)
     {
-        Scanner in = new Scanner(System.in);
         String inputOption;
         int option;
         boolean addingIngredients = true;
         List<Ingredient> ingredients = products.stream()
-                .filter(product -> product instanceof Ingredient)
-                .map(ingredient -> (Ingredient) ingredient).toList();
+                .filter(Ingredient.class::isInstance)
+                .map(Ingredient.class::cast).toList();
         int i = 0;
         int numOption = 1;
         StringBuilder question = new StringBuilder("Qué ingredientes quisieras añadir?");
@@ -276,7 +304,8 @@ public class Subway {
                     else
                     {
                         Ingredient ingredient = ingredients.get(option - 1);
-                        Ingredient addition = new Ingredient(ingredient.getName(),ingredient.getPrice(),true);
+                        Ingredient addition = new Ingredient(ingredient);
+                        addition.setAddition(true);
                         baseSub.addIngredient(addition);
                     }
                 }

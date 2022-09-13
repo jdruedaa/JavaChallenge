@@ -3,24 +3,20 @@ package subway;
 import products.Product;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Order
 {
     private double totalPrice;
-    private ArrayList<Product> products;
+    private final ArrayList<Product> products;
 
     public Order()
     {
         totalPrice = 0;
-        products = new ArrayList<Product>();
+        products = new ArrayList<>();
     }
 
-    public double getTotalPrice()
-    {
-        return totalPrice;
-    }
-
-    public ArrayList<Product> getProducts()
+    public List<Product> getProducts()
     {
         return products;
     }
@@ -34,11 +30,6 @@ public class Order
     private void increaseTotalPrice(double amount)
     {
         totalPrice += amount;
-    }
-
-    private void decreaseTotalPrice(double amount)
-    {
-        totalPrice -= amount;
     }
 
     public String generateReceipt()

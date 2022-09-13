@@ -12,10 +12,11 @@ public class Ingredient extends Product
         isAddition = false;
     }
 
-    public Ingredient(String name, double price, boolean isAddition)
+    public Ingredient(Ingredient ingredient)
     {
-        super(name, price);
-        this.isAddition = isAddition;
+        super(ingredient.name, ingredient.price);
+        this.isAddition = ingredient.isAddition;
+
     }
 
     @Override
