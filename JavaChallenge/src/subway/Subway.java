@@ -1,5 +1,4 @@
 package subway;
-//no spanglish, composición (hay que ver)
 
 import products.Cookie;
 import products.Drink;
@@ -10,7 +9,6 @@ import products.ingredients.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 
 public class Subway {
 
